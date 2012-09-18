@@ -6,3 +6,11 @@ The mosfets controlling the LED strips are connected
 to 3,5,6 as R,G,B.
 
 The ws2801 strings are not currently connected.
+
+MQTT msgs
+---------
+
+perl -e 'print pack "ccc",[r],[g],[b];' | mosquitto_pub -t MainTableLEDs -s  
+perl -e 'print "space-open", (pack "c",0)' | mosquitto_pub -t announce -s  
+perl -e 'print "space-closed", (pack "c",0)' | mosquitto_pub -t announce -s  
+
