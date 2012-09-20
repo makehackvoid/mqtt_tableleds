@@ -11,6 +11,6 @@ MQTT msgs
 ---------
 
 perl -e 'print pack "ccc",[r],[g],[b];' | mosquitto_pub -t MainTableLEDs -s  
-perl -e 'print "space-open", (pack "c",0)' | mosquitto_pub -t announce -s  
-perl -e 'print "space-closed", (pack "c",0)' | mosquitto_pub -t announce -s  
+mosquitto_pub -t announce -m 'space-open'  
+mosquitto_pub -t announce -m 'space-closed'  
 
