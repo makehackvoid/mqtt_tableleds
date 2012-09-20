@@ -1,4 +1,4 @@
-
+#include <string.h>
 #include <SPI.h>
 #include <Ethernet.h>
 #include <PubSubClient.h>
@@ -16,16 +16,14 @@ void callback(char* topic, uint8_t* payload,unsigned int length) {
   // handle message arrived
   if( String(topic) == "announce" ) {
     Serial.println("received announcement");
-    if( payload[length-1] == 0 ) { // It's probably a string :)
-      if( String((char*)payload) == "space-open" ) {
-        analogWrite(3,255);
-        analogWrite(5,255);
-        analogWrite(6,255);
-      } else if ( String((char*)payload) == "space-closed" ) {
-        analogWrite(3,0);
-        analogWrite(5,0);
-        analogWrite(6,0);
-      }
+    if( length == 10 and strncmp((char*)payload,"space-open",length) == 0 ) {
+      analogWrite(3,255);
+      analogWrite(5,255);
+      analogWrite(6,255);
+    } else if ( length == 12 and strncmp((char*)payload,"space-closed",length) == 0 ) {
+      analogWrite(3,0);
+      analogWrite(5,0);
+      analogWrite(6,0);
     }
   }
     
